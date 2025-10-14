@@ -17,13 +17,14 @@
             <ul>
                 <li><a href="index.html">О нас</a></li>
                 <li><a href="builder.html" id="active">Собрать ланч</a></li>
-                <li><a href="#" class="disabled-link">Заказы</a></li>
+                <li><a href="#order-section">Заказы</a></li>
                 <li><a href="index.html#contacts">Контакты</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <!-- существующие секции с меню остаются без изменений -->
         <section class="menu-section">
             <h2>Супы</h2>
             <div class="dishes-grid">
@@ -214,6 +215,112 @@
         </section>
     </main>
 
+    <!-- Секция формы заказа с якорем -->
+    <section class="order-section" id="order-section">
+        <h2>Оформление заказа</h2>
+        <form action="https://httpbin.org/post" method="POST" class="order-form">
+            <div class="form-columns">
+                <div class="order-column">
+                    <h3>Ваш заказ</h3>
+                    
+                    <div class="form-group">
+                        <label for="soup">Выберите суп</label>
+                        <select id="soup" name="soup" required>
+                            <option value="">Выберите суп</option>
+                            <option value="tom-yam">Том Ям с креветками</option>
+                            <option value="mushroom-cream">Грибной крем-суп</option>
+                            <option value="borscht">Борщ с говядиной</option>
+                            <option value="chicken-noodle">Куриный суп с лапшой</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="main-course">Выберите главное блюдо</label>
+                        <select id="main-course" name="main_course" required>
+                            <option value="">Выберите главное блюдо</option>
+                            <option value="teriyaki-chicken">Курица терияки с рисом</option>
+                            <option value="carbonara">Паста Карбонара</option>
+                            <option value="beef-stroganoff">Бефстроганов с пюре</option>
+                            <option value="salmon">Лосось на пару с брокколи</option>
+                            <option value="vegetable-stew">Овощное рагу с тофу</option>
+                            <option value="kiev-cutlet">Котлета по-киевски</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="drink">Выберите напиток</label>
+                        <select id="drink" name="drink" required>
+                            <option value="">Выберите напиток</option>
+                            <option value="berry-juice">Морс ягодный</option>
+                            <option value="tea">Чай черный/зеленый</option>
+                            <option value="coffee">Кофе американо</option>
+                            <option value="orange-juice">Сок апельсиновый</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Комментарий к заказу</label>
+                        <textarea id="comment" name="comment" rows="4" placeholder="Ваши пожелания..."></textarea>
+                    </div>
+                </div>
+
+                <div class="customer-column">
+                    <h3>Ваши данные</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">Имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <label for="newsletter">Подписаться на рассылку</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Адрес доставки *</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Время доставки *</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="time-soon" name="delivery_time" value="soon" required>
+                                <label for="time-soon">Как можно скорее</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="time-specific" name="delivery_time" value="specific" required>
+                                <label for="time-specific">Указать время</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="delivery-time-input">Укажите время доставки</label>
+                        <input type="time" id="delivery-time-input" name="delivery_time_input" 
+                               min="07:00" max="23:00" step="300">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="reset" class="reset-btn">Сбросить</button>
+                <button type="submit" class="submit-btn">Отправить заказ</button>
+            </div>
+        </form>
+    </section>
+
     <footer>
         <div class="footer-content">
             <div class="logo">Lunch<span>Time</span></div>
@@ -221,7 +328,7 @@
             <ul>
                 <li><a href="index.html">О нас</a></li>
                 <li><a href="builder.html" id="active">Собрать ланч</a></li>
-                <li><a href="#" class="disabled-link">Заказы</a></li>
+                <li><a href="#order-section">Заказы</a></li>
                 <li><a href="index.html#contacts">Контакты</a></li>
             </ul>
         </div>
