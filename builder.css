@@ -195,3 +195,8 @@
 .order-column h3 {
     margin-top: 0;
 }
+/* Убираем стандартные стили формы, которые могут мешать */
+.order-column h3 {
+    margin-top: 0;
+}
+
