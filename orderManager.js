@@ -23,6 +23,26 @@ class OrderManager {
                 this.handleDishSelection(dishCard);
             }
         });
+        
+        // Обработчики изменения select'ов в форме
+        this.setupSelectListeners();
+    }
+    
+    setupSelectListeners() {
+        const selects = [
+            { id: 'soup', category: 'soup' },
+            { id: 'main-course', category: 'main' },
+            { id: 'drink', category: 'drink' }
+        ];
+        
+        selects.forEach(({ id, category }) => {
+            const select = document.getElementById(id);
+            if (select) {
+                select.addEventListener('change', (e) => {
+                    this.handleSelectChange(category, e.target.value);
+                });
+            }
+        });
     }
     
     handleDishSelection(dishCard) {
@@ -32,34 +52,42 @@ class OrderManager {
         if (dish) {
             this.selectedDishes[dish.category] = dish;
             this.updateOrderDisplay();
+            this.syncSelects();
         }
     }
     
-    updateOrderDisplay() {
-        this.updateSelects();
-        this.updateOrderSummary();
-        this.updateTotalPrice();
+    handleSelectChange(category, dishKeyword) {
+        if (dishKeyword) {
+            const dish = dishes.find(d => d.keyword === dishKeyword);
+            if (dish) {
+                this.selectedDishes[category] = dish;
+            }
+        } else {
+            this.selectedDishes[category] = null;
+        }
+        this.updateOrderDisplay();
     }
     
-    updateSelects() {
-        // Обновляем select'ы в форме
-        const categories = ['soup', 'main', 'drink'];
+    syncSelects() {
+        // Синхронизируем select'ы с выбранными блюдами
+        const selects = [
+            { id: 'soup', category: 'soup' },
+            { id: 'main-course', category: 'main' },
+            { id: 'drink', category: 'drink' }
+        ];
         
-        categories.forEach(category => {
-            const select = document.getElementById(this.getSelectId(category));
+        selects.forEach(({ id, category }) => {
+            const select = document.getElementById(id);
             if (select && this.selectedDishes[category]) {
                 select.value = this.selectedDishes[category].keyword;
             }
         });
     }
     
-    getSelectId(category) {
-        const selectIds = {
-            soup: 'soup',
-            main: 'main-course',
-            drink: 'drink'
-        };
-        return selectIds[category];
+    updateOrderDisplay() {
+        this.updateOrderSummary();
+        this.updateTotalPrice();
+        this.highlightSelectedDishes();
     }
     
     updateOrderSummary() {
@@ -71,7 +99,10 @@ class OrderManager {
         if (!summaryContainer) {
             summaryContainer = document.createElement('div');
             summaryContainer.className = 'order-summary';
-            orderContainer.insertBefore(summaryContainer, orderContainer.firstChild);
+            const orderColumn = orderContainer.querySelector('h3');
+            if (orderColumn) {
+                orderColumn.insertAdjacentElement('afterend', summaryContainer);
+            }
         }
         
         summaryContainer.innerHTML = this.generateOrderSummaryHTML();
@@ -145,6 +176,23 @@ class OrderManager {
         } else {
             totalContainer.style.display = 'none';
         }
+    }
+    
+    highlightSelectedDishes() {
+        // Убираем выделение со всех карточек
+        document.querySelectorAll('.dish-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        
+        // Выделяем выбранные блюда
+        Object.values(this.selectedDishes).forEach(dish => {
+            if (dish) {
+                const selectedCard = document.querySelector(`[data-dish="${dish.keyword}"]`);
+                if (selectedCard) {
+                    selectedCard.classList.add('selected');
+                }
+            }
+        });
     }
     
     // Метод для получения данных заказа для формы
