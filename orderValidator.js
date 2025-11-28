@@ -59,12 +59,18 @@ class OrderValidator {
         e.preventDefault();
         console.log('Submit button clicked');
         
-        // Проверяем валидность заказа
-        if (this.validateOrder()) {
-            console.log('Order is valid - submitting form');
+        // Сначала проверяем валидность заказа
+        if (!this.validateOrder()) {
+            console.log('Order validation failed');
+            return;
+        }
+        
+        // Затем проверяем личные данные
+        if (this.validatePersonalData()) {
+            console.log('All validations passed - submitting form');
             this.submitForm();
         } else {
-            console.log('Order is invalid - showing notification');
+            console.log('Personal data validation failed');
         }
     }
     
@@ -89,7 +95,57 @@ class OrderValidator {
             return false;
         }
         
+        console.log('Order validation passed');
         return true;
+    }
+    
+    validatePersonalData() {
+        console.log('Validating personal data');
+        
+        const requiredFields = [
+            { id: 'name', name: 'Имя' },
+            { id: 'email', name: 'Email' },
+            { id: 'phone', name: 'Телефон' },
+            { id: 'address', name: 'Адрес доставки' }
+        ];
+        
+        const missingFields = [];
+        
+        // Проверяем обязательные поля
+        requiredFields.forEach(field => {
+            const input = document.getElementById(field.id);
+            if (input && !input.value.trim()) {
+                missingFields.push(field.name);
+            }
+        });
+        
+        // Проверяем выбор времени доставки
+        const deliveryTimeSelected = document.querySelector('input[name="delivery_time"]:checked');
+        if (!deliveryTimeSelected) {
+            missingFields.push('Время доставки');
+        }
+        
+        // Если есть незаполненные поля, показываем уведомление
+        if (missingFields.length > 0) {
+            const message = `Заполните обязательные поля:\n${missingFields.join('\n')}`;
+            this.showNotification(message);
+            return false;
+        }
+        
+        // Проверяем валидность email
+        const emailInput = document.getElementById('email');
+        if (emailInput && !this.isValidEmail(emailInput.value)) {
+            this.showNotification('Введите корректный email адрес');
+            return false;
+        }
+        
+        console.log('Personal data validation passed');
+        return true;
+    }
+    
+    isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
     
     checkLunchCombo(selectedDishes) {
@@ -200,6 +256,7 @@ class OrderValidator {
             <div class="notification-content">
                 <h3>Успех!</h3>
                 <p>Ваш заказ успешно отправлен!</p>
+                <p class="success-details">Мы свяжемся с вами для подтверждения заказа.</p>
                 <button class="notification-ok-btn">Отлично</button>
             </div>
             <div class="notification-overlay"></div>
