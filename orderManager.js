@@ -32,8 +32,10 @@ class OrderManager {
     setupSelectListeners() {
         const selects = [
             { id: 'soup', category: 'soup' },
+            { id: 'salad', category: 'salad' },
             { id: 'main-course', category: 'main' },
-            { id: 'drink', category: 'drink' }
+            { id: 'drink', category: 'drink' },
+            { id: 'dessert', category: 'dessert' }
         ];
         
         selects.forEach(({ id, category }) => {
@@ -74,8 +76,10 @@ class OrderManager {
     syncSelects() {
         const selects = [
             { id: 'soup', category: 'soup' },
+            { id: 'salad', category: 'salad' },
             { id: 'main-course', category: 'main' },
-            { id: 'drink', category: 'drink' }
+            { id: 'drink', category: 'drink' },
+            { id: 'dessert', category: 'dessert' }
         ];
         
         selects.forEach(({ id, category }) => {
@@ -195,6 +199,29 @@ class OrderManager {
             }
         });
     }
+    
+    // Метод для сброса заказа (для кнопки сброса формы)
+    resetOrder() {
+        this.selectedDishes = {
+            soup: null,
+            salad: null,
+            main: null,
+            drink: null,
+            dessert: null
+        };
+        this.updateOrderDisplay();
+        this.highlightSelectedDishes();
+    }
+    
+    // Метод для получения данных заказа для формы
+    getOrderData() {
+        return {
+            ...this.selectedDishes,
+            total: Object.values(this.selectedDishes)
+                .filter(dish => dish !== null)
+                .reduce((sum, dish) => sum + dish.price, 0)
+        };
+    }
 }
 
 // Инициализация менеджера заказов
@@ -202,4 +229,24 @@ let orderManager;
 
 document.addEventListener('DOMContentLoaded', () => {
     orderManager = new OrderManager();
+    
+    // Обработчик для кнопки сброса формы
+    const resetBtn = document.querySelector('.reset-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            // Даем время форме сброситься, затем обновляем наш менеджер
+            setTimeout(() => {
+                orderManager.resetOrder();
+            }, 100);
+        });
+    }
+    
+    // Обработчик для отправки формы (можно добавить валидацию)
+    const submitBtn = document.querySelector('.submit-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', (e) => {
+            // Можно добавить дополнительную валидацию перед отправкой
+            console.log('Данные заказа:', orderManager.getOrderData());
+        });
+    }
 });
