@@ -4,7 +4,8 @@ class OrderManager {
             soup: null,
             salad: null,
             main: null,
-            drink: null
+            drink: null,
+            dessert: null
         };
         
         this.init();
@@ -53,6 +54,7 @@ class OrderManager {
             this.selectedDishes[dish.category] = dish;
             this.updateOrderDisplay();
             this.syncSelects();
+            this.highlightSelectedDishes();
         }
     }
     
@@ -66,10 +68,10 @@ class OrderManager {
             this.selectedDishes[category] = null;
         }
         this.updateOrderDisplay();
+        this.highlightSelectedDishes();
     }
     
     syncSelects() {
-        // Синхронизируем select'ы с выбранными блюдами
         const selects = [
             { id: 'soup', category: 'soup' },
             { id: 'main-course', category: 'main' },
@@ -87,14 +89,12 @@ class OrderManager {
     updateOrderDisplay() {
         this.updateOrderSummary();
         this.updateTotalPrice();
-        this.highlightSelectedDishes();
     }
     
     updateOrderSummary() {
         const orderContainer = document.querySelector('.order-column');
         if (!orderContainer) return;
         
-        // Создаем или находим контейнер для сводки заказа
         let summaryContainer = orderContainer.querySelector('.order-summary');
         if (!summaryContainer) {
             summaryContainer = document.createElement('div');
@@ -121,7 +121,8 @@ class OrderManager {
             soup: 'Суп',
             salad: 'Салат',
             main: 'Главное блюдо',
-            drink: 'Напиток'
+            drink: 'Напиток',
+            dessert: 'Десерт'
         };
         
         Object.entries(this.selectedDishes).forEach(([category, dish]) => {
@@ -149,7 +150,8 @@ class OrderManager {
             soup: 'Суп не выбран',
             salad: 'Салат не выбран',
             main: 'Блюдо не выбрано',
-            drink: 'Напиток не выбран'
+            drink: 'Напиток не выбран',
+            dessert: 'Десерт не выбран'
         };
         return texts[category];
     }
@@ -159,7 +161,6 @@ class OrderManager {
             .filter(dish => dish !== null)
             .reduce((sum, dish) => sum + dish.price, 0);
         
-        // Создаем или обновляем блок с общей стоимостью
         let totalContainer = document.querySelector('.total-price');
         if (!totalContainer) {
             totalContainer = document.createElement('div');
@@ -193,16 +194,6 @@ class OrderManager {
                 }
             }
         });
-    }
-    
-    // Метод для получения данных заказа для формы
-    getOrderData() {
-        return {
-            ...this.selectedDishes,
-            total: Object.values(this.selectedDishes)
-                .filter(dish => dish !== null)
-                .reduce((sum, dish) => sum + dish.price, 0)
-        };
     }
 }
 
