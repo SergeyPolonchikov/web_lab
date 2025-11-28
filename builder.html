@@ -24,34 +24,7 @@
     </header>
 
     <main>
-        <!-- Секции будут заполняться динамически через JavaScript -->
-        <section class="menu-section">
-            <h2>Супы</h2>
-            <div class="dishes-grid">
-                <!-- Блюда будут добавлены через JavaScript -->
-            </div>
-        </section>
-
-        <section class="menu-section">
-            <h2>Салаты</h2>
-            <div class="dishes-grid">
-                <!-- Блюда будут добавлены через JavaScript -->
-            </div>
-        </section>
-
-        <section class="menu-section">
-            <h2>Главные блюда</h2>
-            <div class="dishes-grid">
-                <!-- Блюда будут добавлены через JavaScript -->
-            </div>
-        </section>
-
-        <section class="menu-section">
-            <h2>Напитки</h2>
-            <div class="dishes-grid">
-                <!-- Блюда будут добавлены через JavaScript -->
-            </div>
-        </section>
+        <!-- Все секции будут созданы динамически через JavaScript -->
     </main>
 
     <section class="order-section" id="order-section">
@@ -73,6 +46,21 @@
                             <option value="mushroom-cream">Грибной крем-суп</option>
                             <option value="borscht">Борщ с говядиной</option>
                             <option value="chicken-noodle">Куриный суп с лапшой</option>
+                            <option value="fish-soup">Уха царская</option>
+                            <option value="vegetable-soup">Овощной суп-пюре</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salad">Выберите салат</label>
+                        <select id="salad" name="salad" required>
+                            <option value="">Выберите салат</option>
+                            <option value="greek-salad">Греческий салат</option>
+                            <option value="caesar-chicken">Цезарь с курицей</option>
+                            <option value="vegetable-salad">Овощной салат</option>
+                            <option value="tuna-salad">Салат с тунцом</option>
+                            <option value="quinoa-salad">Салат с киноа</option>
+                            <option value="avocado-salad">Салат с авокадо</option>
                         </select>
                     </div>
 
@@ -82,10 +70,10 @@
                             <option value="">Выберите главное блюдо</option>
                             <option value="teriyaki-chicken">Курица терияки с рисом</option>
                             <option value="carbonara">Паста Карбонара</option>
-                            <option value="beef-stroganoff">Бефстроганов с пюре</option>
                             <option value="salmon">Лосось на пару с брокколи</option>
+                            <option value="fish-steak">Стейк из тунца</option>
                             <option value="vegetable-stew">Овощное рагу с тофу</option>
-                            <option value="kiev-cutlet">Котлета по-киевски</option>
+                            <option value="pasta-veg">Паста с овощами</option>
                         </select>
                     </div>
 
@@ -97,6 +85,21 @@
                             <option value="tea">Чай черный/зеленый</option>
                             <option value="coffee">Кофе американо</option>
                             <option value="orange-juice">Сок апельсиновый</option>
+                            <option value="lemonade">Домашний лимонад</option>
+                            <option value="cappuccino">Капучино</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dessert">Выберите десерт</label>
+                        <select id="dessert" name="dessert" required>
+                            <option value="">Выберите десерт</option>
+                            <option value="tiramisu-small">Тирамису (маленький)</option>
+                            <option value="cheesecake-small">Чизкейк (маленький)</option>
+                            <option value="fruit-salad-small">Фруктовый салат (маленький)</option>
+                            <option value="chocolate-cake">Шоколадный торт</option>
+                            <option value="apple-pie">Яблочный пирог</option>
+                            <option value="ice-cream-large">Мороженое ассорти</option>
                         </select>
                     </div>
 
