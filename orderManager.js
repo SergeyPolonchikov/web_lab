@@ -211,6 +211,27 @@ class OrderManager {
         };
         this.updateOrderDisplay();
         this.highlightSelectedDishes();
+        
+        // Сбрасываем select'ы
+        const selects = [
+            { id: 'soup', category: 'soup' },
+            { id: 'salad', category: 'salad' },
+            { id: 'main-course', category: 'main' },
+            { id: 'drink', category: 'drink' },
+            { id: 'dessert', category: 'dessert' }
+        ];
+        
+        selects.forEach(({ id }) => {
+            const select = document.getElementById(id);
+            if (select) {
+                select.value = '';
+            }
+        });
+    }
+    
+    // Метод для получения выбранных блюд (для валидатора)
+    getSelectedDishes() {
+        return { ...this.selectedDishes };
     }
     
     // Метод для получения данных заказа для формы
@@ -241,12 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Обработчик для отправки формы (можно добавить валидацию)
+    // Обработчик для отправки формы
     const submitBtn = document.querySelector('.submit-btn');
     if (submitBtn) {
         submitBtn.addEventListener('click', (e) => {
-            // Можно добавить дополнительную валидацию перед отправкой
             console.log('Данные заказа:', orderManager.getOrderData());
         });
     }
+    
+    console.log('OrderManager initialized successfully');
 });
