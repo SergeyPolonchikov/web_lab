@@ -135,15 +135,15 @@
                     <p>Можно добавить к любому варианту ланча</p>
                     <div class="dessert-features">
                         <div class="dessert-feature-item">
-                            <span>•</span>
+                            <span class="dessert-icon">•</span>
                             <span>Маленькие порции</span>
                         </div>
                         <div class="dessert-feature-item">
-                            <span>•</span>
+                            <span class="dessert-icon">•</span>
                             <span>Средние порции</span>
                         </div>
                         <div class="dessert-feature-item">
-                            <span>•</span>
+                            <span class="dessert-icon">•</span>
                             <span>Большие порции</span>
                         </div>
                     </div>
@@ -159,88 +159,68 @@
 
 
 
-    <section class="order-section" id="order-section">
+     <section class="order-section" id="order-section">
         <h2>Оформление заказа</h2>
-        <form action="https://httpbin.org/post" method="POST" class="order-form">
-            <!-- Сводка заказа будет добавлена динамически -->
-            
+        
+        <!-- Сводка заказа (во всю ширину) -->
+        <div class="order-summary-fullwidth">
+            <!-- Динамическая сводка заказа появится здесь -->
+            <div class="empty-order-message">Выберите блюда из меню выше</div>
+        </div>
+
+        <div class="order-form-container">
             <div class="form-columns">
-                <div class="order-column">
-                    <!-- Динамическая сводка заказа появится здесь -->
-                    
-                    <h3>Выбор блюд в форме</h3>
+                <!-- Левая колонка: выбор блюд -->
+                <div class="customer-column">
+                    <h3>Выберите блюда</h3>
                     
                     <div class="form-group">
-                        <label for="soup">Выберите суп</label>
-                        <select id="soup" name="soup" required>
+                        <label for="soup">Суп</label>
+                        <select id="soup" name="soup">
                             <option value="">Выберите суп</option>
-                            <option value="tom-yam">Том Ям с креветками</option>
-                            <option value="mushroom-cream">Грибной крем-суп</option>
-                            <option value="borscht">Борщ с говядиной</option>
-                            <option value="chicken-noodle">Куриный суп с лапшой</option>
-                            <option value="fish-soup">Уха царская</option>
-                            <option value="vegetable-soup">Овощной суп-пюре</option>
+                            <!-- Опции будут добавлены динамически -->
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="salad">Выберите салат</label>
-                        <select id="salad" name="salad" required>
+                        <label for="salad">Салат</label>
+                        <select id="salad" name="salad">
                             <option value="">Выберите салат</option>
-                            <option value="greek-salad">Греческий салат</option>
-                            <option value="caesar-chicken">Цезарь с курицей</option>
-                            <option value="vegetable-salad">Овощной салат</option>
-                            <option value="tuna-salad">Салат с тунцом</option>
-                            <option value="quinoa-salad">Салат с киноа</option>
-                            <option value="avocado-salad">Салат с авокадо</option>
+                            <!-- Опции будут добавлены динамически -->
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="main-course">Выберите главное блюдо</label>
-                        <select id="main-course" name="main_course" required>
+                        <label for="main-course">Главное блюдо</label>
+                        <select id="main-course" name="main_course">
                             <option value="">Выберите главное блюдо</option>
-                            <option value="teriyaki-chicken">Курица терияки с рисом</option>
-                            <option value="carbonara">Паста Карбонара</option>
-                            <option value="salmon">Лосось на пару с брокколи</option>
-                            <option value="fish-steak">Стейк из тунца</option>
-                            <option value="vegetable-stew">Овощное рагу с тофу</option>
-                            <option value="pasta-veg">Паста с овощами</option>
+                            <!-- Опции будут добавлены динамически -->
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="drink">Выберите напиток</label>
-                        <select id="drink" name="drink" required>
+                        <label for="drink">Напиток</label>
+                        <select id="drink" name="drink">
                             <option value="">Выберите напиток</option>
-                            <option value="berry-juice">Морс ягодный</option>
-                            <option value="tea">Чай черный/зеленый</option>
-                            <option value="coffee">Кофе американо</option>
-                            <option value="orange-juice">Сок апельсиновый</option>
-                            <option value="lemonade">Домашний лимонад</option>
-                            <option value="cappuccino">Капучино</option>
+                            <!-- Опции будут добавлены динамически -->
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="dessert">Выберите десерт</label>
-                        <select id="dessert" name="dessert" required>
+                        <label for="dessert">Десерт</label>
+                        <select id="dessert" name="dessert">
                             <option value="">Выберите десерт</option>
-                            <option value="tiramisu-small">Тирамису (маленький)</option>
-                            <option value="cheesecake-small">Чизкейк (маленький)</option>
-                            <option value="fruit-salad-small">Фруктовый салат (маленький)</option>
-                            <option value="chocolate-cake">Шоколадный торт</option>
-                            <option value="apple-pie">Яблочный пирог</option>
-                            <option value="ice-cream-large">Мороженое ассорти</option>
+                            <!-- Опции будут добавлены динамически -->
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="comment">Комментарий к заказу</label>
                         <textarea id="comment" name="comment" rows="4" placeholder="Ваши пожелания..."></textarea>
                     </div>
                 </div>
 
+                <!-- Правая колонка: личные данные -->
                 <div class="customer-column">
                     <h3>Ваши данные</h3>
                     
@@ -288,17 +268,18 @@
                         <input type="time" id="delivery-time-input" name="delivery_time_input" 
                                min="07:00" max="23:00" step="300">
                     </div>
+                    
+                    <!-- Кнопки формы -->
+                    <div class="form-buttons">
+                        <button type="reset" class="reset-btn">Сбросить</button>
+                        <button type="submit" class="submit-btn">Отправить заказ</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-buttons">
-                <button type="reset" class="reset-btn">Сбросить</button>
-                <button type="submit" class="submit-btn">Отправить заказ</button>
-            </div>
-        </form>
+        </div>
     </section>
 
-    <footer>
+       <footer>
         <div class="footer-content">
             <div class="logo">Lunch<span>Time</span></div>
             <p>© 2023 Доставка бизнес-ланчей в Москве</p>
@@ -318,4 +299,3 @@
     <script src="orderValidator.js"></script>
 </body>
 </html>
-
