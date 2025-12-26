@@ -211,7 +211,7 @@ class OrderValidator {
     }
     
     disableBrowserValidation() {
-        const orderForm = document.querySelector('.order-form-container');
+        const orderForm = document.getElementById('order-form');
         if (orderForm) {
             orderForm.setAttribute('novalidate', 'novalidate');
         }
@@ -539,3 +539,4 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('OrderValidator initialized successfully');
     }, 500);
 });
+
