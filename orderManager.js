@@ -95,6 +95,17 @@ class OrderManager {
                     this.handleDishSelection(dishCard);
                 }
             }
+             const orderForm = document.getElementById('order-form');
+    if (orderForm) {
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted');
+            // Вызываем валидацию
+            if (window.orderValidator) {
+                window.orderValidator.handleSubmitClick(e);
+            }
+        });
+    }
         });
         
         this.setupSelectListeners();
@@ -467,3 +478,4 @@ document.addEventListener('DOMContentLoaded', () => {
     orderManager = new OrderManager();
     window.orderManager = orderManager;
 });
+
